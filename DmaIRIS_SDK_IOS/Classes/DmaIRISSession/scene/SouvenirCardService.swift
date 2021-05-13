@@ -55,6 +55,11 @@ open class SouvenirCardServiceSession: AbstractService  {
         }
     }
     
+    public func issueDenomTxBody(denom: Denom<SouvenirCardInfo>) -> TxBody {
+        
+        let txBody = NFTService.createMsgIssueDenom(sender: denom.create, nftName: denom.name, denom: denom.denom, nftSchema: Schema.souvenirCard.toJSONString())
+        return txBody
+    }
     /**
      * 发行卡
      *
@@ -90,6 +95,66 @@ open class SouvenirCardServiceSession: AbstractService  {
                             successCallback: @escaping (_ tx: TxTx) -> (),
                             errorCallback: @escaping FPErrorCallback) {
         
+//        var builder = TxBody()
+//        
+//        for ticketEntity in ticketEntities {
+//            
+//            var dataStandard = DataStandard<SouvenirCardInfo>()
+//            
+//            dataStandard.body = ticketEntity
+//            dataStandard.protoc = ProtocEnum.souvenirCard.rawValue
+//            if (isSign) {
+//                dataStandard.sign(signPriKey: privateKey, pubKeyEnum: .base64)
+//            }
+//            
+//            var nft = NftMsgMintNFT()
+//            nft.data = dataStandard.toJSONString() ?? ""
+//            nft.recipient = recipient
+//            nft.sender = sender
+//        
+//            nft.denomID = ticketEntity.denomId
+//            nft.name = ticketEntity.name
+//            nft.id = ticketEntity.tokenId
+//            nft.uri = ticketEntity.imgUrl
+//            
+//            if let any =  TxUtils.getProtobufAny(message: nft, typePrefix: "") {
+//                builder.messages.append(any)
+//            }
+//        }
+//        
+//        builder.memo = ""
+//        builder.timeoutHeight = 0
+        
+        var builder = self.getCardsTxBody(ticketEntities: ticketEntities,
+                                          sender: sender,
+                                          recipient: recipient,
+                                          privateKey: privateKey,
+                                          isSign: isSign)
+        //转手续费
+        if feeAddress != "" && fee != "" {
+            let bankMsgSend = TokenService.getBankMsgSend(from: sender,
+                                                          to: feeAddress,
+                                                          denom: IRISServive.defaultCoin,
+                                                          amount: fee)
+            if let any =  TxUtils.getProtobufAny(message: bankMsgSend, typePrefix: "") {
+                builder.messages.append(any)
+            }
+        }
+        
+        TxService.signTx(txBody: builder,
+                         gasLimit: gasLimit,
+                         privateKey: privateKey) { tx in
+            successCallback(tx)
+         } errorCallBack: { error in
+            errorCallback(error)
+        }
+    }
+    
+    public func getCardsTxBody(ticketEntities: [SouvenirCardInfo],
+                               sender: String,
+                               recipient: String,
+                               privateKey: String,
+                               isSign: Bool) -> TxBody {
         var builder = TxBody()
         
         for ticketEntity in ticketEntities {
@@ -119,25 +184,28 @@ open class SouvenirCardServiceSession: AbstractService  {
         
         builder.memo = ""
         builder.timeoutHeight = 0
-        //转手续费
-        if feeAddress != "" && fee != "" {
-            let bankMsgSend = TokenService.getBankMsgSend(from: sender,
-                                                          to: feeAddress,
-                                                          denom: IRISServive.defaultCoin,
-                                                          amount: fee)
-            if let any =  TxUtils.getProtobufAny(message: bankMsgSend, typePrefix: "") {
-                builder.messages.append(any)
-            }
-        }
         
-        TxService.signTx(txBody: builder,
-                         gasLimit: gasLimit,
-                         privateKey: privateKey) { tx in
-            successCallback(tx)
-         } errorCallBack: { error in
-            errorCallback(error)
-        }
+        return builder
     }
+    
+    public func newUserBuild(from: String, to: String) -> TxBody {
+        
+        
+        var body = TxBody()
+        body.memo = ""
+        body.timeoutHeight = 0
+
+        let bankMsgSend = TokenService.getBankMsgSend(from: from,
+                                                      to: to,
+                                                      denom: IRISServive.defaultCoin,
+                                                      amount: "100")
+        if let any =  TxUtils.getProtobufAny(message: bankMsgSend, typePrefix: "") {
+            body.messages.append(any)
+        }
+
+        return body
+    }
+
     /**
      * 获取票详情
      *

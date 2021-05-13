@@ -9,9 +9,12 @@ import Foundation
 import HandyJSON
 
 public class IrisMessage: HandyJSON {
-    
-    required public init() {
+    public required init() {
         
+    }
+    
+    public required  init(_ type: String) {
+        self.type = type
     }
 
     public var type: String = ""    

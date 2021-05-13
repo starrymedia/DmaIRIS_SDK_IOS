@@ -99,7 +99,6 @@ public class DataStandard<T:HandyJSON>: HandyJSON {
         if (self.body == nil) {
             return "";
         }
-        #warning("有疑问")
         let bodyStr = self.body?.toJSONString()
         let bodySort = String((bodyStr?.sorted())!)
         return bodySort
@@ -112,15 +111,20 @@ public enum PublicKeyEnum: String {
     case base64 = "/uptick.base64"
 }
 
-public class Signature  {
-
+public class Signature: HandyJSON  {
+    required public init() {
+        
+    }
     var sigData: String = ""
     var pubKey: PublicKey? = nil
 }
 
-public class PublicKey {
+public class PublicKey: HandyJSON {
+    public required init() {
+        
+    }
     
-    init(type:String, value: String) {
+    public init(type:String, value: String) {
         self.type = type
         self.value = value
     }

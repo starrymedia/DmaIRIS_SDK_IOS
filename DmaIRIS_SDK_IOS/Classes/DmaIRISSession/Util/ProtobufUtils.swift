@@ -100,8 +100,7 @@ public class ProtobufUtils {
         switch txType {
         case .msgSend:
             if let message = try? BankMsgSend(serializedData: value) {
-                let msg = MsgSend()
-                msg.type = txTypeString
+                let msg = MsgSend(txTypeString)
                 msg.fromAddress = message.fromAddress
                 msg.toAddress = message.toAddress
                 
@@ -113,8 +112,136 @@ public class ProtobufUtils {
                 }
                 return msg
             }
-         
-            break
+        case .msgMultiSend:
+            if let message = try? BankMsgMultiSend(serializedData: value) {
+                let msg = MsgMultiSend(txTypeString)
+                let outputsList = message.outputs
+                let inputsListput = message.inputs
+                
+                var outPuts = [Output]()
+                for output in outputsList {
+                    let o = Output()
+                    o.address = output.address
+                    let amount = self.parseCoins(coinList: output.coins)
+                    o.coins = amount
+                }
+                msg.outputs = outPuts
+                
+                var inPuts = [Input]()
+                for intput in inputsListput {
+                    let i = Input()
+                    i.address = intput.address
+                    let amount = self.parseCoins(coinList: intput.coins)
+                    i.coins = amount
+                }
+                msg.inputs = inPuts
+                return msg
+            }
+        case .msgDelegate: break
+        case .msgUndelegate: break
+        case .msgBeginRedelegate: break
+        case .msgWithdrawDelegatorReward: break
+        case .msgSetWithdrawAddress: break
+        case .msgIssueToken:
+            if let message = try? TokenMsgIssueToken(serializedData: value) {
+                let owner = message.owner
+                let msgIssueToken = MsgIssueToken(txTypeString)
+                msgIssueToken.owner = owner
+                msgIssueToken.initialSupply = message.initialSupply
+                msgIssueToken.maxSupply = message.maxSupply
+                msgIssueToken.mintAble = message.mintable
+                msgIssueToken.minUnit = message.minUnit
+                msgIssueToken.name = message.name
+                msgIssueToken.scale = message.scale
+                msgIssueToken.symbol = message.symbol
+                return msgIssueToken
+            }
+        case .msgEditToken:
+            if let message = try? TokenMsgEditToken(serializedData: value) {
+                let owner = message.owner
+                let msgEditToken = MsgEditToken(txTypeString)
+                msgEditToken.maxSupply = message.maxSupply
+                msgEditToken.mintAble = message.mintable
+                msgEditToken.name = message.name
+                msgEditToken.symbol = message.symbol
+                msgEditToken.owner = owner
+                return msgEditToken
+            }
+        case .msgMintToken:
+            if let message = try? TokenMsgMintToken(serializedData: value) {
+                let owner = message.owner
+                let to = message.to
+                let msgMintToken = MsgMintToken(txTypeString)
+                msgMintToken.amount = message.amount
+                msgMintToken.symbol = message.symbol
+                msgMintToken.owner = owner
+                msgMintToken.to = to
+                return msgMintToken
+            }
+        case .msgTransferTokenOwner:
+            if let message = try? TokenMsgTransferTokenOwner(serializedData: value) {
+                let dstOwner = message.dstOwner
+                let srcOwner = message.srcOwner
+                let msgTransferTokenOwner = MsgTransferTokenOwner(txTypeString)
+                msgTransferTokenOwner.dstOwner = dstOwner
+                msgTransferTokenOwner.srcOwner = srcOwner
+                msgTransferTokenOwner.symbol = message.symbol
+                return msgTransferTokenOwner
+            }
+        //coinswap
+        case .msgAddLiquidity: break
+        case .msgRemoveLiquidity: break
+        case .msgSwapOrder: break
+        //nft
+        case .msgIssueDenom:
+            if let message = try? NftMsgIssueDenom(serializedData: value) {
+                let sender = message.sender
+                let msgIssueNFT = MsgIssueNFT(txTypeString)
+                msgIssueNFT.denom = message.id
+                msgIssueNFT.name = message.name
+                msgIssueNFT.schema = message.schema
+                msgIssueNFT.sender = sender
+                return msgIssueNFT
+            }
+        case .msgMintNFT:
+            if let message = try? NftMsgMintNFT(serializedData: value) {
+                let msgMintNFT = MsgMintNFT(txTypeString)
+                let sender = message.sender
+                let recipient = message.recipient
+                
+                msgMintNFT.data = message.data
+                msgMintNFT.name = message.name
+                msgMintNFT.denom = message.denomID
+                msgMintNFT.tokenId = message.id
+                msgMintNFT.uri = message.uri
+                msgMintNFT.sender = sender
+                msgMintNFT.recipient = recipient
+                return msgMintNFT
+            }
+        case .msgEditNFT:
+            if let message = try? NftMsgEditNFT(serializedData: value) {
+                let msgEditNFT = MsgEditNFT(txTypeString)
+                let sender = message.sender
+                msgEditNFT.data = message.data
+                msgEditNFT.name = message.name
+                msgEditNFT.denom = message.denomID
+                msgEditNFT.tokenId = message.id
+                msgEditNFT.uri = message.uri
+                msgEditNFT.sender = sender
+                return msgEditNFT
+            }
+        case .msgTransferNFT:
+            if let message = try? NftMsgEditNFT(serializedData: value) {
+                let msgEditNFT = MsgEditNFT(txTypeString)
+                let sender = message.sender
+                msgEditNFT.data = message.data
+                msgEditNFT.name = message.name
+                msgEditNFT.denom = message.denomID
+                msgEditNFT.tokenId = message.id
+                msgEditNFT.uri = message.uri
+                msgEditNFT.sender = sender
+                return msgEditNFT
+            }
         default:
             break
         }

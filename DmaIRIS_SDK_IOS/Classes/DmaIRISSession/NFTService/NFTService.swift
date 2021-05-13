@@ -33,20 +33,20 @@ open class NFTSession {
                          errorCallback: @escaping FPErrorCallback) {
         
         
+//        //创建Nft.MsgIssueDenom
+//        var msgIssueDenom = NftMsgIssueDenom()
+//        msgIssueDenom.name = nftName
+//        msgIssueDenom.schema = nftSchema
+//        msgIssueDenom.id = denom
+//        msgIssueDenom.sender = sender
+//
+//        //创建TxBody
+//        var txBody = TxUtils.getBody(meno: "", timeoutHeight: 0)
+//        if let any = TxUtils.getProtobufAny(message: msgIssueDenom, typePrefix: "") {
+//            txBody.messages.append(any)
+//        }
         
-        //创建Nft.MsgIssueDenom
-        var msgIssueDenom = NftMsgIssueDenom()
-        msgIssueDenom.name = nftName
-        msgIssueDenom.schema = nftSchema
-        msgIssueDenom.id = denom
-        msgIssueDenom.sender = sender
-
-        //创建TxBody
-        var txBody = TxUtils.getBody(meno: "", timeoutHeight: 0)
-        if let any = TxUtils.getProtobufAny(message: msgIssueDenom, typePrefix: "") {
-            txBody.messages.append(any)
-        }
-        
+        let txBody = self.createMsgIssueDenom(sender: sender, nftName: nftName, denom: denom, nftSchema: nftSchema)
         //签名交易
         TxService.signTx(txBody: txBody,
                          gasLimit: gasLimit,
@@ -61,6 +61,25 @@ open class NFTSession {
         } errorCallBack: { error in
             errorCallback(error)
         }
+    }
+    
+    public func createMsgIssueDenom(sender: String,
+                                    nftName: String,
+                                    denom: String,
+                                    nftSchema: String) -> TxBody {
+        //创建Nft.MsgIssueDenom
+        var msgIssueDenom = NftMsgIssueDenom()
+        msgIssueDenom.name = nftName
+        msgIssueDenom.schema = nftSchema
+        msgIssueDenom.id = denom
+        msgIssueDenom.sender = sender
+
+        //创建TxBody
+        var txBody = TxUtils.getBody(meno: "", timeoutHeight: 0)
+        if let any = TxUtils.getProtobufAny(message: msgIssueDenom, typePrefix: "") {
+            txBody.messages.append(any)
+        }
+        return txBody
     }
     
    
@@ -233,27 +252,28 @@ open class NFTSession {
         
     }
     
-    ///转送NFT
-    public func transferToken(sender: String,
-                              recipient: String,
-                              denom: String,
-                              tokenIds: [String],
-                              privateKey: String,
-                              gasLimit: UInt64 = 0,
-                              method: RpcMethods,
-                              successCallback: @escaping (_ res: BroadcastModel) -> (),
-                              errorCallback: @escaping FPErrorCallback) {
-        self.transferToken(sender: sender,
-                           recipient: recipient,
-                           denom: denom,
-                           tokenIds: tokenIds,
-                           memo: "",
-                           gasLimit: gasLimit,
-                           privateKey: privateKey,
-                           method: method,
-                           successCallback: successCallback,
-                           errorCallback: errorCallback)
-    }
+//    ///转送NFT
+//    public func transferToken(sender: String,
+//                              recipient: String,
+//                              denom: String,
+//                              tokenIds: [String],
+//                              memo: String,
+//                              privateKey: String,
+//                              gasLimit: UInt64 = 0,
+//                              method: RpcMethods,
+//                              successCallback: @escaping (_ res: BroadcastModel) -> (),
+//                              errorCallback: @escaping FPErrorCallback) {
+//        self.transferToken(sender: sender,
+//                           recipient: recipient,
+//                           denom: denom,
+//                           tokenIds: tokenIds,
+//                           memo: memo,
+//                           gasLimit: gasLimit,
+//                           privateKey: privateKey,
+//                           method: method,
+//                           successCallback: successCallback,
+//                           errorCallback: errorCallback)
+//    }
 
     /// 批量转送NFT
     /// - Parameters:
@@ -276,6 +296,49 @@ open class NFTSession {
                               successCallback: @escaping (_ res: BroadcastModel) -> (),
                               errorCallback: @escaping FPErrorCallback) {
         
+//        var txBody = TxUtils.getBody(meno: memo, timeoutHeight: 0)
+//        for tokenId in tokenIds {
+//            var transferNFT = NftMsgTransferNFT()
+//            transferNFT.denomID = denom
+//            transferNFT.uri = "[do-not-modify]"
+//            transferNFT.name = "[do-not-modify]"
+//            transferNFT.data = "[do-not-modify]"
+//            transferNFT.id = tokenId
+//            transferNFT.sender = sender
+//            transferNFT.recipient = recipient
+//
+//            if let any = TxUtils.getProtobufAny(message: transferNFT,typePrefix: "") {
+//                txBody.messages.append(any)
+//            }
+//        }
+        
+        let txBody = self.getTransferTokenBody(sender: sender,
+                                               recipient: recipient,
+                                               denom: denom,
+                                               tokenIds: tokenIds,
+                                               memo: memo)
+                
+        TxService.signTx(txBody: txBody,
+                         gasLimit: gasLimit,
+                         privateKey: privateKey) { tx in
+            
+            RpcService.broadcast(tx: tx, method: method) { res in
+                successCallback(res)
+            } errorCallBack: { error in
+                errorCallback(error)
+            }
+        }errorCallBack: { error in
+            errorCallback(error)
+        }
+        
+    }
+    
+    public func getTransferTokenBody(sender: String,
+                                     recipient: String,
+                                     denom: String,
+                                     tokenIds: [String],
+                                     memo: String) -> TxBody {
+        
         var txBody = TxUtils.getBody(meno: memo, timeoutHeight: 0)
         for tokenId in tokenIds {
             var transferNFT = NftMsgTransferNFT()
@@ -291,20 +354,8 @@ open class NFTSession {
                 txBody.messages.append(any)
             }
         }
-                
-        TxService.signTx(txBody: txBody,
-                         gasLimit: gasLimit,
-                         privateKey: privateKey) { tx in
-            
-            RpcService.broadcast(tx: tx, method: method) { res in
-                successCallback(res)
-            } errorCallBack: { error in
-                errorCallback(error)
-            }
-        }errorCallBack: { error in
-            errorCallback(error)
-        }
         
+        return txBody
     }
     
     

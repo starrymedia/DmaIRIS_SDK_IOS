@@ -90,34 +90,34 @@ struct Cosmos_Tx_V1beta1_TxRaw {
 }
 
 /// SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT.
-struct Cosmos_Tx_V1beta1_SignDoc {
+public struct Cosmos_Tx_V1beta1_SignDoc {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   /// body_bytes is protobuf serialization of a TxBody that matches the
   /// representation in TxRaw.
-  var bodyBytes: Data = SwiftProtobuf.Internal.emptyData
+    public var bodyBytes: Data = SwiftProtobuf.Internal.emptyData
 
   /// auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
   /// representation in TxRaw.
-  var authInfoBytes: Data = SwiftProtobuf.Internal.emptyData
+    public var authInfoBytes: Data = SwiftProtobuf.Internal.emptyData
 
   /// chain_id is the unique identifier of the chain this transaction targets.
   /// It prevents signed transactions from being used on another chain by an
   /// attacker
-  var chainID: String = String()
+    public var chainID: String = String()
 
   /// account_number is the account number of the account in state
-  var accountNumber: UInt64 = 0
+    public var accountNumber: UInt64 = 0
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// TxBody is the body of a transaction that all signers sign over.
-struct Cosmos_Tx_V1beta1_TxBody {
+public struct Cosmos_Tx_V1beta1_TxBody {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -129,28 +129,28 @@ struct Cosmos_Tx_V1beta1_TxBody {
   /// By convention, the first required signer (usually from the first message)
   /// is referred to as the primary signer and pays the fee for the whole
   /// transaction.
-  var messages: [SwiftProtobuf.Google_Protobuf_Any] = []
+    public var messages: [SwiftProtobuf.Google_Protobuf_Any] = []
 
   /// memo is any arbitrary memo to be added to the transaction
-  var memo: String = String()
+    public var memo: String = String()
 
   /// timeout is the block height after which this transaction will not
   /// be processed by the chain
-  var timeoutHeight: UInt64 = 0
+    public var timeoutHeight: UInt64 = 0
 
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, the transaction will be rejected
-  var extensionOptions: [SwiftProtobuf.Google_Protobuf_Any] = []
+    public var extensionOptions: [SwiftProtobuf.Google_Protobuf_Any] = []
 
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, they will be ignored
-  var nonCriticalExtensionOptions: [SwiftProtobuf.Google_Protobuf_Any] = []
+    public var nonCriticalExtensionOptions: [SwiftProtobuf.Google_Protobuf_Any] = []
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// AuthInfo describes the fee and signer modes that are used to sign a
@@ -490,15 +490,15 @@ extension Cosmos_Tx_V1beta1_TxRaw: SwiftProtobuf.Message, SwiftProtobuf._Message
 }
 
 extension Cosmos_Tx_V1beta1_SignDoc: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".SignDoc"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".SignDoc"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "body_bytes"),
     2: .standard(proto: "auth_info_bytes"),
     3: .standard(proto: "chain_id"),
     4: .standard(proto: "account_number"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularBytesField(value: &self.bodyBytes)
@@ -510,7 +510,7 @@ extension Cosmos_Tx_V1beta1_SignDoc: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.bodyBytes.isEmpty {
       try visitor.visitSingularBytesField(value: self.bodyBytes, fieldNumber: 1)
     }
@@ -526,7 +526,7 @@ extension Cosmos_Tx_V1beta1_SignDoc: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Cosmos_Tx_V1beta1_SignDoc, rhs: Cosmos_Tx_V1beta1_SignDoc) -> Bool {
+    public static func ==(lhs: Cosmos_Tx_V1beta1_SignDoc, rhs: Cosmos_Tx_V1beta1_SignDoc) -> Bool {
     if lhs.bodyBytes != rhs.bodyBytes {return false}
     if lhs.authInfoBytes != rhs.authInfoBytes {return false}
     if lhs.chainID != rhs.chainID {return false}
@@ -537,8 +537,8 @@ extension Cosmos_Tx_V1beta1_SignDoc: SwiftProtobuf.Message, SwiftProtobuf._Messa
 }
 
 extension Cosmos_Tx_V1beta1_TxBody: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".TxBody"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".TxBody"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "messages"),
     2: .same(proto: "memo"),
     3: .standard(proto: "timeout_height"),
@@ -546,7 +546,7 @@ extension Cosmos_Tx_V1beta1_TxBody: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2047: .standard(proto: "non_critical_extension_options"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeRepeatedMessageField(value: &self.messages)
@@ -559,7 +559,7 @@ extension Cosmos_Tx_V1beta1_TxBody: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.messages.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.messages, fieldNumber: 1)
     }
@@ -578,7 +578,7 @@ extension Cosmos_Tx_V1beta1_TxBody: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Cosmos_Tx_V1beta1_TxBody, rhs: Cosmos_Tx_V1beta1_TxBody) -> Bool {
+    public static func ==(lhs: Cosmos_Tx_V1beta1_TxBody, rhs: Cosmos_Tx_V1beta1_TxBody) -> Bool {
     if lhs.messages != rhs.messages {return false}
     if lhs.memo != rhs.memo {return false}
     if lhs.timeoutHeight != rhs.timeoutHeight {return false}

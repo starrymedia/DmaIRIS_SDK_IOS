@@ -51,33 +51,33 @@ struct Cosmos_Bank_V1beta1_SendEnabled {
 }
 
 /// Input models transaction input.
-struct Cosmos_Bank_V1beta1_Input {
+public struct Cosmos_Bank_V1beta1_Input {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var address: String = String()
+    public var address: String = String()
 
-  var coins: [Cosmos_Base_V1beta1_Coin] = []
+    public var coins: [Cosmos_Base_V1beta1_Coin] = []
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// Output models transaction outputs.
-struct Cosmos_Bank_V1beta1_Output {
+public struct Cosmos_Bank_V1beta1_Output {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var address: String = String()
+    public var address: String = String()
 
-  var coins: [Cosmos_Base_V1beta1_Coin] = []
+    public var coins: [Cosmos_Base_V1beta1_Coin] = []
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// Supply represents a struct that passively keeps track of the total supply
@@ -218,13 +218,13 @@ extension Cosmos_Bank_V1beta1_SendEnabled: SwiftProtobuf.Message, SwiftProtobuf.
 }
 
 extension Cosmos_Bank_V1beta1_Input: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Input"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".Input"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .same(proto: "coins"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.address)
@@ -234,7 +234,7 @@ extension Cosmos_Bank_V1beta1_Input: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
     }
@@ -244,7 +244,7 @@ extension Cosmos_Bank_V1beta1_Input: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Cosmos_Bank_V1beta1_Input, rhs: Cosmos_Bank_V1beta1_Input) -> Bool {
+    public static func ==(lhs: Cosmos_Bank_V1beta1_Input, rhs: Cosmos_Bank_V1beta1_Input) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.coins != rhs.coins {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -253,13 +253,13 @@ extension Cosmos_Bank_V1beta1_Input: SwiftProtobuf.Message, SwiftProtobuf._Messa
 }
 
 extension Cosmos_Bank_V1beta1_Output: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Output"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".Output"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .same(proto: "coins"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.address)
@@ -269,7 +269,7 @@ extension Cosmos_Bank_V1beta1_Output: SwiftProtobuf.Message, SwiftProtobuf._Mess
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.address.isEmpty {
       try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
     }
@@ -279,7 +279,7 @@ extension Cosmos_Bank_V1beta1_Output: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Cosmos_Bank_V1beta1_Output, rhs: Cosmos_Bank_V1beta1_Output) -> Bool {
+    public static func ==(lhs: Cosmos_Bank_V1beta1_Output, rhs: Cosmos_Bank_V1beta1_Output) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.coins != rhs.coins {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

@@ -122,6 +122,7 @@ open class AbstractService  {
                               recipient: String,
                               denom: String,
                               tokenIds: [String],
+                              memo: String,
                               privateKey: String,
                               gasLimit: UInt64 = 0,
                               method: RpcMethods,
@@ -131,8 +132,9 @@ open class AbstractService  {
                            recipient: recipient,
                            denom: denom,
                            tokenIds: tokenIds,
-                           privateKey: privateKey,
+                           memo: memo,
                            gasLimit: gasLimit,
+                           privateKey: privateKey,
                            method: method,
                            successCallback: successCallback,
                            errorCallback: errorCallback)

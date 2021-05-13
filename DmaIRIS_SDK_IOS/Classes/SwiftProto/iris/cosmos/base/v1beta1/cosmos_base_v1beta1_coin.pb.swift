@@ -28,9 +28,9 @@ public struct Cosmos_Base_V1beta1_Coin {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var denom: String = String()
+    public var denom: String = String()
 
-  var amount: String = String()
+    public var amount: String = String()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 

@@ -28,15 +28,23 @@ open class DmaIRISSession {
     //MARK:- init
     init() { }
     
-    lazy var channel: ClientConnection = {
+//    lazy var channel: ClientConnection = {
+//        let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
+//        assert(host != "","host is empty")
+//        assert(port != 0,"prot is empty")
+//        let channel = ClientConnection.insecure(group: group)
+//            .connect(host: self.host, port: self.port)
+//        return channel
+//    }()
+
+    var channel: ClientConnection {
         let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
         assert(host != "","host is empty")
         assert(port != 0,"prot is empty")
         let channel = ClientConnection.insecure(group: group)
             .connect(host: self.host, port: self.port)
         return channel
-    }()
-
+    }
 
 }
 

@@ -12,32 +12,34 @@ public struct BroadcastModel: HandyJSON {
     public init() { }
     public var jsonrpc: String?
     public var id: String?
-    var result: BroadcastResult?
+    public var result: BroadcastResult?
 }
 
-struct BroadcastResult: HandyJSON {
-    var hash: String?
-    var height: String?
-    var check_tx: BroadcastTx?
-    var deliver_tx: BroadcastTx?
+public struct BroadcastResult: HandyJSON {
+    public init() { }
+    public var hash: String?
+    public var height: String?
+    public var check_tx: BroadcastTx?
+    public var deliver_tx: BroadcastTx?
 }
 
-struct BroadcastTx: HandyJSON {
-    var code: Int?
-    var data: Any?
-    var log: String?
-    var info: String?
-    var gas_wanted: String?
-    var gas_used: String?
-    var codespace: String?
-    var events: [Any]?
+public struct BroadcastTx: HandyJSON {
+    public init() { }
+    public var code: Int?
+    public var data: Any?
+    public var log: String?
+    public var info: String?
+    public var gas_wanted: String?
+    public var gas_used: String?
+    public var codespace: String?
+    public var events: [Any]?
 }
 
 public struct BroadcastRequest<T:Encodable>: Encodable {
-    let id: String
-    let jsonrpc: String
-    let method: String
-    let params: T
+    public let id: String
+    public let jsonrpc: String
+    public let method: String
+    public let params: T
     
     public init(id: String, jsonrpc: String, method: String, params: T) {
         self.id = id

@@ -20,30 +20,30 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// MsgIssueToken defines an SDK message for issuing a new token.
-struct Irismod_Token_MsgIssueToken {
+public struct Irismod_Token_MsgIssueToken {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var symbol: String = String()
+    public var symbol: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var scale: UInt32 = 0
+    public var scale: UInt32 = 0
 
-  var minUnit: String = String()
+    public var minUnit: String = String()
 
-  var initialSupply: UInt64 = 0
+    public var initialSupply: UInt64 = 0
 
-  var maxSupply: UInt64 = 0
+    public var maxSupply: UInt64 = 0
 
-  var mintable: Bool = false
+    public var mintable: Bool = false
 
-  var owner: String = String()
+    public var owner: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgIssueTokenResponse defines the Msg/IssueToken response type.
@@ -58,20 +58,20 @@ struct Irismod_Token_MsgIssueTokenResponse {
 }
 
 /// MsgMintToken defines an SDK message for transferring the token owner.
-struct Irismod_Token_MsgTransferTokenOwner {
+public struct Irismod_Token_MsgTransferTokenOwner {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var srcOwner: String = String()
+    public var srcOwner: String = String()
 
-  var dstOwner: String = String()
+    public var dstOwner: String = String()
 
-  var symbol: String = String()
+    public var symbol: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgTransferTokenOwnerResponse defines the Msg/TransferTokenOwner response type.
@@ -86,24 +86,24 @@ struct Irismod_Token_MsgTransferTokenOwnerResponse {
 }
 
 /// MsgEditToken defines an SDK message for editing a new token.
-struct Irismod_Token_MsgEditToken {
+public struct Irismod_Token_MsgEditToken {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var symbol: String = String()
+    public var symbol: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var maxSupply: UInt64 = 0
+    public var maxSupply: UInt64 = 0
 
-  var mintable: String = String()
+    public var mintable: String = String()
 
-  var owner: String = String()
+    public var owner: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgEditTokenResponse defines the Msg/EditToken response type.
@@ -118,22 +118,22 @@ struct Irismod_Token_MsgEditTokenResponse {
 }
 
 /// MsgMintToken defines an SDK message for minting a new token.
-struct Irismod_Token_MsgMintToken {
+public struct Irismod_Token_MsgMintToken {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var symbol: String = String()
+    public var symbol: String = String()
 
-  var amount: UInt64 = 0
+    public var amount: UInt64 = 0
 
-  var to: String = String()
+    public var to: String = String()
 
-  var owner: String = String()
+    public var owner: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgMintTokenResponse defines the Msg/MintToken response type.
@@ -180,8 +180,8 @@ struct Irismod_Token_MsgBurnTokenResponse {
 fileprivate let _protobuf_package = "irismod.token"
 
 extension Irismod_Token_MsgIssueToken: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgIssueToken"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgIssueToken"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "symbol"),
     2: .same(proto: "name"),
     3: .same(proto: "scale"),
@@ -192,7 +192,7 @@ extension Irismod_Token_MsgIssueToken: SwiftProtobuf.Message, SwiftProtobuf._Mes
     8: .same(proto: "owner"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.symbol)
@@ -208,7 +208,7 @@ extension Irismod_Token_MsgIssueToken: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.symbol.isEmpty {
       try visitor.visitSingularStringField(value: self.symbol, fieldNumber: 1)
     }
@@ -236,7 +236,7 @@ extension Irismod_Token_MsgIssueToken: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Token_MsgIssueToken, rhs: Irismod_Token_MsgIssueToken) -> Bool {
+    public static func ==(lhs: Irismod_Token_MsgIssueToken, rhs: Irismod_Token_MsgIssueToken) -> Bool {
     if lhs.symbol != rhs.symbol {return false}
     if lhs.name != rhs.name {return false}
     if lhs.scale != rhs.scale {return false}
@@ -270,14 +270,14 @@ extension Irismod_Token_MsgIssueTokenResponse: SwiftProtobuf.Message, SwiftProto
 }
 
 extension Irismod_Token_MsgTransferTokenOwner: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgTransferTokenOwner"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgTransferTokenOwner"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "src_owner"),
     2: .standard(proto: "dst_owner"),
     3: .same(proto: "symbol"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.srcOwner)
@@ -288,7 +288,7 @@ extension Irismod_Token_MsgTransferTokenOwner: SwiftProtobuf.Message, SwiftProto
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.srcOwner.isEmpty {
       try visitor.visitSingularStringField(value: self.srcOwner, fieldNumber: 1)
     }
@@ -301,7 +301,7 @@ extension Irismod_Token_MsgTransferTokenOwner: SwiftProtobuf.Message, SwiftProto
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Token_MsgTransferTokenOwner, rhs: Irismod_Token_MsgTransferTokenOwner) -> Bool {
+    public static func ==(lhs: Irismod_Token_MsgTransferTokenOwner, rhs: Irismod_Token_MsgTransferTokenOwner) -> Bool {
     if lhs.srcOwner != rhs.srcOwner {return false}
     if lhs.dstOwner != rhs.dstOwner {return false}
     if lhs.symbol != rhs.symbol {return false}
@@ -330,8 +330,8 @@ extension Irismod_Token_MsgTransferTokenOwnerResponse: SwiftProtobuf.Message, Sw
 }
 
 extension Irismod_Token_MsgEditToken: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgEditToken"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgEditToken"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "symbol"),
     2: .same(proto: "name"),
     3: .standard(proto: "max_supply"),
@@ -339,7 +339,7 @@ extension Irismod_Token_MsgEditToken: SwiftProtobuf.Message, SwiftProtobuf._Mess
     5: .same(proto: "owner"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.symbol)
@@ -352,7 +352,7 @@ extension Irismod_Token_MsgEditToken: SwiftProtobuf.Message, SwiftProtobuf._Mess
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.symbol.isEmpty {
       try visitor.visitSingularStringField(value: self.symbol, fieldNumber: 1)
     }
@@ -371,7 +371,7 @@ extension Irismod_Token_MsgEditToken: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Token_MsgEditToken, rhs: Irismod_Token_MsgEditToken) -> Bool {
+    public static func ==(lhs: Irismod_Token_MsgEditToken, rhs: Irismod_Token_MsgEditToken) -> Bool {
     if lhs.symbol != rhs.symbol {return false}
     if lhs.name != rhs.name {return false}
     if lhs.maxSupply != rhs.maxSupply {return false}
@@ -402,15 +402,15 @@ extension Irismod_Token_MsgEditTokenResponse: SwiftProtobuf.Message, SwiftProtob
 }
 
 extension Irismod_Token_MsgMintToken: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgMintToken"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgMintToken"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "symbol"),
     2: .same(proto: "amount"),
     3: .same(proto: "to"),
     4: .same(proto: "owner"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.symbol)
@@ -422,7 +422,7 @@ extension Irismod_Token_MsgMintToken: SwiftProtobuf.Message, SwiftProtobuf._Mess
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.symbol.isEmpty {
       try visitor.visitSingularStringField(value: self.symbol, fieldNumber: 1)
     }
@@ -438,7 +438,7 @@ extension Irismod_Token_MsgMintToken: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Token_MsgMintToken, rhs: Irismod_Token_MsgMintToken) -> Bool {
+    public static func ==(lhs: Irismod_Token_MsgMintToken, rhs: Irismod_Token_MsgMintToken) -> Bool {
     if lhs.symbol != rhs.symbol {return false}
     if lhs.amount != rhs.amount {return false}
     if lhs.to != rhs.to {return false}

@@ -13,7 +13,8 @@ struct OnsaleRequest: Encodable {
     var labels: [Labels]?
     var tokenIds: [String]?
     var signatures: String?
-    var callback: String?
+    var callBack: String?
+    var hash: String?
     var transfers: [TransferEntity]?
 }
 

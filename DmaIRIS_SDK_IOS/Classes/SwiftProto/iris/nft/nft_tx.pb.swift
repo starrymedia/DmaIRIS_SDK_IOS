@@ -20,22 +20,22 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// MsgIssueDenom defines an SDK message for creating a new denom.
-struct Irismod_Nft_MsgIssueDenom {
+public struct Irismod_Nft_MsgIssueDenom {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+    public var id: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var schema: String = String()
+    public var schema: String = String()
 
-  var sender: String = String()
+    public var sender: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgIssueDenomResponse defines the Msg/IssueDenom response type.
@@ -50,28 +50,28 @@ struct Irismod_Nft_MsgIssueDenomResponse {
 }
 
 /// MsgTransferNFT defines an SDK message for transferring an NFT to recipient.
-struct Irismod_Nft_MsgTransferNFT {
+public struct Irismod_Nft_MsgTransferNFT {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+    public var id: String = String()
 
-  var denomID: String = String()
+    public var denomID: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var uri: String = String()
+    public var uri: String = String()
 
-  var data: String = String()
+    public var data: String = String()
 
-  var sender: String = String()
+    public var sender: String = String()
 
-  var recipient: String = String()
+    public var recipient: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgTransferNFTResponse defines the Msg/TransferNFT response type.
@@ -86,26 +86,26 @@ struct Irismod_Nft_MsgTransferNFTResponse {
 }
 
 /// MsgEditNFT defines an SDK message for editing a nft.
-struct Irismod_Nft_MsgEditNFT {
+public struct Irismod_Nft_MsgEditNFT {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+    public var id: String = String()
 
-  var denomID: String = String()
+    public var denomID: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var uri: String = String()
+    public var uri: String = String()
 
-  var data: String = String()
+    public var data: String = String()
 
-  var sender: String = String()
+    public var sender: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgEditNFTResponse defines the Msg/EditNFT response type.
@@ -120,28 +120,28 @@ struct Irismod_Nft_MsgEditNFTResponse {
 }
 
 /// MsgMintNFT defines an SDK message for creating a new NFT.
-struct Irismod_Nft_MsgMintNFT {
+public struct Irismod_Nft_MsgMintNFT {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+    public var id: String = String()
 
-  var denomID: String = String()
+    public var denomID: String = String()
 
-  var name: String = String()
+    public var name: String = String()
 
-  var uri: String = String()
+    public var uri: String = String()
 
-  var data: String = String()
+    public var data: String = String()
 
-  var sender: String = String()
+    public var sender: String = String()
 
-  var recipient: String = String()
+    public var recipient: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgMintNFTResponse defines the Msg/MintNFT response type.
@@ -156,20 +156,20 @@ struct Irismod_Nft_MsgMintNFTResponse {
 }
 
 /// MsgBurnNFT defines an SDK message for burning a NFT.
-struct Irismod_Nft_MsgBurnNFT {
+public struct Irismod_Nft_MsgBurnNFT {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+    public var id: String = String()
 
-  var denomID: String = String()
+    public var denomID: String = String()
 
-  var sender: String = String()
+    public var sender: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+    public init() {}
 }
 
 /// MsgBurnNFTResponse defines the Msg/BurnNFT response type.
@@ -188,15 +188,15 @@ struct Irismod_Nft_MsgBurnNFTResponse {
 fileprivate let _protobuf_package = "irismod.nft"
 
 extension Irismod_Nft_MsgIssueDenom: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgIssueDenom"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgIssueDenom"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "name"),
     3: .same(proto: "schema"),
     4: .same(proto: "sender"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.id)
@@ -208,7 +208,7 @@ extension Irismod_Nft_MsgIssueDenom: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -224,7 +224,7 @@ extension Irismod_Nft_MsgIssueDenom: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Nft_MsgIssueDenom, rhs: Irismod_Nft_MsgIssueDenom) -> Bool {
+    public static func ==(lhs: Irismod_Nft_MsgIssueDenom, rhs: Irismod_Nft_MsgIssueDenom) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.name != rhs.name {return false}
     if lhs.schema != rhs.schema {return false}
@@ -338,8 +338,8 @@ extension Irismod_Nft_MsgTransferNFTResponse: SwiftProtobuf.Message, SwiftProtob
 }
 
 extension Irismod_Nft_MsgEditNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgEditNFT"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgEditNFT"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "denom_id"),
     3: .same(proto: "name"),
@@ -348,7 +348,7 @@ extension Irismod_Nft_MsgEditNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     6: .same(proto: "sender"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.id)
@@ -362,7 +362,7 @@ extension Irismod_Nft_MsgEditNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -384,7 +384,7 @@ extension Irismod_Nft_MsgEditNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Nft_MsgEditNFT, rhs: Irismod_Nft_MsgEditNFT) -> Bool {
+    public static func ==(lhs: Irismod_Nft_MsgEditNFT, rhs: Irismod_Nft_MsgEditNFT) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.denomID != rhs.denomID {return false}
     if lhs.name != rhs.name {return false}
@@ -416,8 +416,8 @@ extension Irismod_Nft_MsgEditNFTResponse: SwiftProtobuf.Message, SwiftProtobuf._
 }
 
 extension Irismod_Nft_MsgMintNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgMintNFT"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgMintNFT"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "denom_id"),
     3: .same(proto: "name"),
@@ -427,7 +427,7 @@ extension Irismod_Nft_MsgMintNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     7: .same(proto: "recipient"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.id)
@@ -442,7 +442,7 @@ extension Irismod_Nft_MsgMintNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -467,7 +467,7 @@ extension Irismod_Nft_MsgMintNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Nft_MsgMintNFT, rhs: Irismod_Nft_MsgMintNFT) -> Bool {
+    public static func ==(lhs: Irismod_Nft_MsgMintNFT, rhs: Irismod_Nft_MsgMintNFT) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.denomID != rhs.denomID {return false}
     if lhs.name != rhs.name {return false}
@@ -500,14 +500,14 @@ extension Irismod_Nft_MsgMintNFTResponse: SwiftProtobuf.Message, SwiftProtobuf._
 }
 
 extension Irismod_Nft_MsgBurnNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgBurnNFT"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgBurnNFT"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "denom_id"),
     3: .same(proto: "sender"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.id)
@@ -518,7 +518,7 @@ extension Irismod_Nft_MsgBurnNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -531,7 +531,7 @@ extension Irismod_Nft_MsgBurnNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Nft_MsgBurnNFT, rhs: Irismod_Nft_MsgBurnNFT) -> Bool {
+    public static func ==(lhs: Irismod_Nft_MsgBurnNFT, rhs: Irismod_Nft_MsgBurnNFT) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.denomID != rhs.denomID {return false}
     if lhs.sender != rhs.sender {return false}

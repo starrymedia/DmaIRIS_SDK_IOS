@@ -76,7 +76,7 @@ public struct MerchantResponseModel: HandyJSON {
 
 struct MerchantOnSale: Encodable {
     
-    let callback: String
+    let callBack: String
 //    let pubKey: String
     let denom: String
     let owner: String
@@ -94,7 +94,7 @@ struct MerchantOnSaleLabels: Encodable {
 
 struct MerchantOffSale: Encodable {
     
-    let callback: String
+    let callBack: String
     let pubKey: String
     let denom: String
     let owner: String

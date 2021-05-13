@@ -15,6 +15,7 @@ let getAssetByDenomUrl = "/api/1/query/getAssetByDenom"//根据denom查询已上
 let getTokenUrl = "/api/1/query/getToken"//获取已上架NFT信息
 let allAssetByAddressUrl = "/api/1/query/allAssetByAddress"//根据钱包地址查询已上架的所有资产种类
 let getTokensByAddressUrl = "/api/1/query/getTokensByAddress"//根据钱包地址以及类型查询已上架的所有NFT
+let onsaleByHashUrl = "/api/1/merchant/onsaleByHash"//根据hash上下架
 
 public let MerchantService = Merchant.default
 
@@ -162,7 +163,7 @@ public class Merchant {
         var params = OnsaleRequest()
         params.denom = denom
         params.owner = WalletManager.exportBech32Address(privateKey: privateKey)
-        params.callback = callback
+        params.callBack = callback
         
         var labels = [Labels]()
         for tokenid in tokenids {
@@ -194,6 +195,77 @@ public class Merchant {
     }
     
  
+    public func newUserOnsale(denom: String,
+                              tokenids: [String],
+                              price: String,
+                              hash: String,
+                              transfers: [String: String]? = nil,
+                              privateKey: String,
+                              callback: String = "",
+                              successCallback: @escaping (_ value: String) -> (),
+                              errorCallback: @escaping FPErrorCallback) {
+        
+
+        //转换位数
+        let amount = self.toWei(tokenSymblol: IRISServive.defaultCoin,
+                                amount: Decimal(Double(price) ?? 0.0))
+        print("amount:\(amount)")
+        self.newUserOnsaleRequset(denom: denom,
+                           tokenids: tokenids,
+                           price: amount,
+                           hash: hash,
+                           transfers: transfers,
+                           privateKey: privateKey,
+                           callback: callback,
+                           successCallback: successCallback,
+                           errorCallback: errorCallback)
+    }
+    
+    func newUserOnsaleRequset(denom: String,
+                              tokenids: [String],
+                              price: String,
+                              hash: String,
+                              transfers: [String: String]? = nil,
+                              privateKey: String,
+                              callback: String,
+                              successCallback: @escaping (_ value: String) -> (),
+                              errorCallback: @escaping FPErrorCallback) {
+        
+        var params = OnsaleRequest()
+        params.denom = denom
+        params.owner = WalletManager.exportBech32Address(privateKey: privateKey)
+        params.callBack = callback
+        params.hash = hash
+        
+        var labels = [Labels]()
+        for tokenid in tokenids {
+            let label = Labels(tokenId: tokenid, price: Int(price))
+            labels.append(label)
+        }
+        params.labels = labels
+        
+        //判断是否需要转账
+        if (transfers != nil && transfers!.count > 0) {
+            //需要转账数组
+            var transferEntityList = [TransferEntity]()
+            for (key,value) in transfers! {
+                var transferEntity = TransferEntity()
+                let amount = Decimal(string: value)!
+                let result = MerchantService.toWei(tokenSymblol:IRISServive.defaultCoin, amount: amount)
+                transferEntity.received = key
+                transferEntity.amount = result
+                transferEntityList.append(transferEntity)
+            }
+            params.transfers = transferEntityList
+        }
+
+        IRISAF.postRequest(url: nodeUrl + onsaleByHashUrl, parameters: params) { jsonString in
+            successCallback(jsonString)
+        } errorCallBack: { error in
+            errorCallback(error)
+        }
+    }
+    
     
     //http请求merchant 获取 TxBody
     func getOnSaleTxBody(url: String,
@@ -229,6 +301,7 @@ public class Merchant {
                 errorCallback("onsale serializedTxbody error")
                 return
             }
+            
             self.getOnSaleSignatures(url: url,
                                      txBody: body,
                                      parameters: parameters,
@@ -300,7 +373,7 @@ public class Merchant {
         let publicKeyString = publicKeyData.base64EncodedString() ?? ""
         let address = WalletManager.exportBech32Address(privateKey: privateKey)
 
-        let param = MerchantOffSale(callback: callback,
+        let param = MerchantOffSale(callBack: callback,
                                     pubKey: publicKeyString,
                                     denom: denom,
                                     owner: address,
