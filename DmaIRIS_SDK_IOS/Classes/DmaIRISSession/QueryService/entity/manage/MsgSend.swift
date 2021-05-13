@@ -108,3 +108,20 @@ public class MsgEditNFT: IrisMessage {
     public var sender: String = ""
  }
 
+public class MsgTransferNFT: IrisMessage {
+    
+    public var tokenId: String = ""
+    public var denom: String = ""
+    public var name: String = ""
+    public var uri: String = ""
+    public var data: String = ""
+    public var sender: String = ""
+    public var recipient: String = ""
+}
+
+public class MsgBurnNFT: IrisMessage {
+    
+    public var tokenId: String = ""
+    public var denom: String = ""
+    public var sender: String = ""
+ }

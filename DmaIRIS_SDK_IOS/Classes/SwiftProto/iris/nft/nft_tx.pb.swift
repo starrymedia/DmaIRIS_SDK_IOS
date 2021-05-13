@@ -254,8 +254,8 @@ extension Irismod_Nft_MsgIssueDenomResponse: SwiftProtobuf.Message, SwiftProtobu
 }
 
 extension Irismod_Nft_MsgTransferNFT: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgTransferNFT"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    public static let protoMessageName: String = _protobuf_package + ".MsgTransferNFT"
+    public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "denom_id"),
     3: .same(proto: "name"),
@@ -265,7 +265,7 @@ extension Irismod_Nft_MsgTransferNFT: SwiftProtobuf.Message, SwiftProtobuf._Mess
     7: .same(proto: "recipient"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    mutating public func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.id)
@@ -280,7 +280,7 @@ extension Irismod_Nft_MsgTransferNFT: SwiftProtobuf.Message, SwiftProtobuf._Mess
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -305,7 +305,7 @@ extension Irismod_Nft_MsgTransferNFT: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Irismod_Nft_MsgTransferNFT, rhs: Irismod_Nft_MsgTransferNFT) -> Bool {
+    public static func ==(lhs: Irismod_Nft_MsgTransferNFT, rhs: Irismod_Nft_MsgTransferNFT) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.denomID != rhs.denomID {return false}
     if lhs.name != rhs.name {return false}

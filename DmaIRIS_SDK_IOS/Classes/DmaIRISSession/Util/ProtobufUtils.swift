@@ -231,16 +231,27 @@ public class ProtobufUtils {
                 return msgEditNFT
             }
         case .msgTransferNFT:
-            if let message = try? NftMsgEditNFT(serializedData: value) {
-                let msgEditNFT = MsgEditNFT(txTypeString)
+            if let message = try? NftMsgTransferNFT(serializedData: value) {
+                let msgTransferNFT = MsgTransferNFT(txTypeString)
                 let sender = message.sender
-                msgEditNFT.data = message.data
-                msgEditNFT.name = message.name
-                msgEditNFT.denom = message.denomID
-                msgEditNFT.tokenId = message.id
-                msgEditNFT.uri = message.uri
-                msgEditNFT.sender = sender
-                return msgEditNFT
+                let recipient = message.recipient
+                msgTransferNFT.data = message.data
+                msgTransferNFT.name = message.name
+                msgTransferNFT.denom = message.denomID
+                msgTransferNFT.tokenId = message.id
+                msgTransferNFT.uri = message.uri
+                msgTransferNFT.sender = sender
+                msgTransferNFT.recipient = recipient
+                return msgTransferNFT
+            }
+        case .msgBurnNFT:
+            if let message = try? NftMsgBurnNFT(serializedData: value) {
+                let msgBurnNFT = MsgBurnNFT(txTypeString)
+                let sender = message.sender
+                msgBurnNFT.denom = message.denomID
+                msgBurnNFT.tokenId = message.id
+                msgBurnNFT.sender = sender
+                return msgBurnNFT
             }
         default:
             break
