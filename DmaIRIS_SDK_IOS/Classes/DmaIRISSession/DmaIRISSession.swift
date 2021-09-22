@@ -24,6 +24,7 @@ open class DmaIRISSession {
     open var chainId = ""
     open var defaultCoin = "uiris"
     open var defaultGasPrice = 0.3
+    open var scale = 6
 
     //MARK:- init
     init() { }

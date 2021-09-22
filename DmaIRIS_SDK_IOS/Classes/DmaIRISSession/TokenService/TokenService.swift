@@ -618,6 +618,17 @@ open class TokenServiceSession {
     }
     
     /// 精度转换
+    public func gettToWei(tokenSymblol: String) {
+     
+        self.tokenInfo(denom: tokenSymblol) { token in
+            IRISServive.scale = Int(token.scale)
+        } errorCallBack: { error in
+//            errorCallBack(error)
+        }
+
+    }
+    
+    /// 精度转换
     public func forWei(tokenSymblol: String,
                             amount: Decimal,
                             successCallback: @escaping (_ amount: String) -> (),

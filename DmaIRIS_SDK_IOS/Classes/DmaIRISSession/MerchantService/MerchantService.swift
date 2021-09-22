@@ -138,31 +138,24 @@ public class Merchant {
                        successCallback: @escaping (_ value: String) -> (),
                        errorCallback: @escaping FPErrorCallback) {
         
-
         //转换位数
-        self.toWei(tokenSymblol: IRISServive.defaultCoin,
-                   amount: Decimal(Double(price) ?? 0.0)) { (amount,scale) in
-            print("amount:\(amount)")
-            //可能转换失败
-            if amount == "" {
-                errorCallback("toWei error")
-                return
-            }
-            self.onsaleRequset(denom: denom,
-                               tokenids: tokenids,
-                               price: amount,
-                               transfers: transfers,
-                               privateKey: privateKey,
-                               callback: callback,
-                               cardDenom: cardDenom,
-                               cardAmount: cardAmount,
-                               scale: scale,
-                               successCallback: successCallback,
-                               errorCallback: errorCallback)
-
-        } errorCallBack: { error in
-            errorCallback(error)
+        let amount = self.toWei(amount: Decimal(Double(price)!))
+        print("amount:\(amount)")
+        //可能转换失败
+        if amount == "" {
+            errorCallback("toWei error")
+            return
         }
+        self.onsaleRequset(denom: denom,
+                           tokenids: tokenids,
+                           price: amount,
+                           transfers: transfers,
+                           privateKey: privateKey,
+                           callback: callback,
+                           cardDenom: cardDenom,
+                           cardAmount: cardAmount,
+                           successCallback: successCallback,
+                           errorCallback: errorCallback)
     }
     
     func onsaleRequset(denom: String,
@@ -173,7 +166,6 @@ public class Merchant {
                        callback: String,
                        cardDenom: String,
                        cardAmount: String,
-                       scale: Int16,
                        successCallback: @escaping (_ value: String) -> (),
                        errorCallback: @escaping FPErrorCallback) {
         
@@ -182,14 +174,14 @@ public class Merchant {
         params.owner = WalletManager.exportBech32Address(privateKey: privateKey)
         params.callBack = callback
         
-        if Int(price) == nil {
+        guard let labelPrice = Int(price) else {
             errorCallback("onsale price error")
             return
         }
         
         var labels = [Labels]()
         for tokenid in tokenids {
-            let label = Labels(tokenId: tokenid, price: Int(price))
+            let label = Labels(tokenId: tokenid, price: labelPrice)
             labels.append(label)
         }
         params.labels = labels
@@ -211,7 +203,7 @@ public class Merchant {
                 var amount = Decimal(string: value)!
 
                 var result = Decimal()
-                NSDecimalMultiplyByPowerOf10(&result, &amount, scale, .plain)
+                NSDecimalMultiplyByPowerOf10(&result, &amount, Int16(IRISServive.scale), .plain)
                 var rounded = Decimal()
                 NSDecimalRound(&rounded, &result, 0, .down)
                 let resultstring = NSDecimalString(&rounded, nil)
@@ -242,29 +234,22 @@ public class Merchant {
                               errorCallback: @escaping FPErrorCallback) {
         
         //转换位数
-        self.toWei(tokenSymblol: IRISServive.defaultCoin,
-                   amount: Decimal(Double(price) ?? 0.0)) { (amount,scale) in
-            print("amount:\(amount)")
-            //可能转换失败
-            if amount == "" {
-                errorCallback("toWei error")
-                return
-            }
-            self.newUserOnsaleRequset(denom: denom,
-                                    tokenids: tokenids,
-                                    price: amount,
-                                    hash: hash,
-                                    transfers: transfers,
-                                    privateKey: privateKey,
-                                    scale: scale,
-                                    callback: callback,
-                                    successCallback: successCallback,
-                                    errorCallback: errorCallback)
-
-        } errorCallBack: { error in
-            errorCallback(error)
+        let amount = self.toWei(amount: Decimal(Double(price)!))
+        print("amount:\(amount)")
+        //可能转换失败
+        if amount == "" {
+            errorCallback("toWei error")
+            return
         }
-
+        self.newUserOnsaleRequset(denom: denom,
+                                tokenids: tokenids,
+                                price: amount,
+                                hash: hash,
+                                transfers: transfers,
+                                privateKey: privateKey,
+                                callback: callback,
+                                successCallback: successCallback,
+                                errorCallback: errorCallback)
     }
     
     func newUserOnsaleRequset(denom: String,
@@ -273,7 +258,6 @@ public class Merchant {
                               hash: String,
                               transfers: [String: String]? = nil,
                               privateKey: String,
-                              scale: Int16,
                               callback: String,
                               successCallback: @escaping (_ value: String) -> (),
                               errorCallback: @escaping FPErrorCallback) {
@@ -284,14 +268,14 @@ public class Merchant {
         params.callBack = callback
         params.hash = hash
         
-        if Int(price) == nil {
+         guard let labelPrice = Int(price) else {
             errorCallback("onsale price error")
             return
         }
         
         var labels = [Labels]()
         for tokenid in tokenids {
-            let label = Labels(tokenId: tokenid, price: Int(price))
+            let label = Labels(tokenId: tokenid, price: labelPrice)
             labels.append(label)
         }
         params.labels = labels
@@ -306,7 +290,7 @@ public class Merchant {
                 var amount = Decimal(string: value)!
                 
                 var result = Decimal()
-                NSDecimalMultiplyByPowerOf10(&result, &amount, scale, .plain)
+                NSDecimalMultiplyByPowerOf10(&result, &amount, Int16(IRISServive.scale), .plain)
                 var rounded = Decimal()
                 NSDecimalRound(&rounded, &result, 0, .down)
                 let resultstring = NSDecimalString(&rounded, nil)
@@ -596,22 +580,15 @@ public class Merchant {
     }
     
     /// 精度转换
-    public func toWei(tokenSymblol: String,
-                      amount: Decimal,
-                      successCallback: @escaping (_ amount: String,_ scale: Int16) -> (),
-                      errorCallBack: @escaping FPErrorCallback) {
+    public func toWei(amount: Decimal) -> String {
      
-        TokenService.tokenInfo(denom: tokenSymblol) { token in
-            var amount = amount
-            var result = Decimal()
-            NSDecimalMultiplyByPowerOf10(&result, &amount, Int16(token.scale), .plain)
-            var rounded = Decimal()
-            NSDecimalRound(&rounded, &result, 0, .down)
-            let resultstring = NSDecimalString(&rounded, nil)
-            successCallback(resultstring, Int16(token.scale))
-        } errorCallBack: { error in
-            errorCallBack(error)
-        }
+        var amount = amount
+        var result = Decimal()
+        NSDecimalMultiplyByPowerOf10(&result, &amount, Int16(IRISServive.scale), .plain)
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &result, 0, .down)
+        let resultstring = NSDecimalString(&rounded, nil)
+        return resultstring
 
     }
     
